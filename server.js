@@ -3,9 +3,9 @@ const express = require("express");
 const routes = require("./routes");
 
 const app = express();
-const PORT = process.env.PORT || 3006;
+const PORT = process.env.PORT || 3009;
 
-app.use(express.json);
+app.use(express.json());
 app.use(
   express.urlencoded({
     extended: true,
@@ -14,10 +14,10 @@ app.use(
 app.use(routes);
 mongoose.set("strictQuery", false);
 mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/socialnetworkdb",
+  process.env.MONGODB_URI || "mongodb://localhost/Socialnetworkdb",
   {
     // useFindAndModify: false,
-    useNewUrlParser: true,
+    // useNewUrlParser: true,
     useUnifiedTopology: true,
   }
 );
