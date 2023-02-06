@@ -18,8 +18,8 @@ const ReactionSchema = new Schema(
       required: true,
     },
     createdAt: {
-      type: Data,
-      default: Data.now,
+      type: Date,
+      default: Date.now,
       get: (createdAtVal) => {
         dateFormat(createdAtVal);
       },
@@ -32,8 +32,8 @@ const ReactionSchema = new Schema(
   }
 );
 
-const ThoughtSchema =
-  ({
+const ThoughtSchema = new Schema(
+  {
     thoughtText: {
       type: String,
       required: "thoughtText is required",
@@ -51,7 +51,7 @@ const ThoughtSchema =
       unique: true,
       required: "Username is Required",
     },
-    reaction: [ReactionSchema],
+    reactions: [ReactionSchema],
   },
   {
     toJSON: {
@@ -59,10 +59,10 @@ const ThoughtSchema =
       getters: true,
     },
     id: false,
-  });
-ThoughtSchema.virtuals("reactionCount").get(function () {
-  return this.reaction.length;
+  }
+);
+ThoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
 });
-
 const Thought = model("Thought", ThoughtSchema);
 module.exports = Thought;
